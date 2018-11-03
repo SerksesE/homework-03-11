@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
 
 class App extends Component {
+  state = {}
+
+  getComputerNames = () => {
+    return Object.keys(this.props.computer)
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+  }
+
+  updateSelection = () => {
+    this.setState({
+      
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <select onChange={this.updateSelection}>
+              <option value="">-- pick a model --</option>
+              <option value={this.getComputerNames()[0]}>{this.getComputerNames()[0]} ({this.props.computer["Ivel Z3"].year})  </option>
+              <option value={this.getComputerNames()[1]}>{this.getComputerNames()[1]} ({this.props.computer["Bally Astrocade"].year}) </option>
+              <option value={this.getComputerNames()[2]}>{this.getComputerNames()[2]} ({this.props.computer["Sord M200 Smart Home Computer"].year}) </option>
+              <option value={this.getComputerNames()[3]}>{this.getComputerNames()[3]} ({this.props.computer["Commodore 64"].year}) </option>
+            </select>
+            </label>
+            <input type="submit" value="Add"/>
+        </form>
       </div>
     );
   }
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return {
+    computer: state.computer
+  }
+}
+
+export default connect(mapStateToProps)(App)
