@@ -3,7 +3,7 @@ import './App.css';
 import { connect } from 'react-redux'
 
 class App extends Component {
-  state = {}
+  state = { selectedComputer: null}
 
   getComputerNames = () => {
     return Object.keys(this.props.computer)
@@ -15,9 +15,10 @@ class App extends Component {
 
   updateSelection = () => {
     this.setState({
-      
+
     })
   }
+  
 
   render() {
     return (
